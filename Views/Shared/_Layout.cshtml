@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>- DevBlog</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+
+    <link rel="icon" type="image/x-icon" href="~/assets/favicon.ico">
+
+    <style>
+        .background-animated {
+            background-image: url("https://media0.giphy.com/media/l3q2RgN7WUjeUUXm0/giphy.gif");
+            background-size: contain;
+        }
+    </style>
+
+</head>
+<body class="background-animated">
+
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <label class="navbar-brand " style="color:#6f42c1; font-style:italic">DevBlog</label>
+
+
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2 " type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+
+            </div>
+        </nav>
+    </header>
+
+    <aside class="header text-center">
+        <h1 class="blog-name pt-lg-4 mb-0">Tasnim's Blog</h1>
+
+        <nav class="navbar navbar-expand-lg navbar-dark">
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="navigation" class="collapse navbar-collapse flex-column">
+                <div class="profile-section pt-3 pt-lg-0">
+                    <img class="profile-image mb-3 rounded-circle mx-auto" src="~/assets/images/me.png" alt="image">
+
+                    <div class="bio mb-3">Hi, my name is Tasnim Bennacer. I'm currently at ECE Paris to get my engineering degree. Rigorous and passionate about computer science, I want to participate in raising awareness among companies on this subject.</div><!--//bio-->
+                    <ul class="social-list list-inline py-3 mx-auto">
+                        <li class="list-inline-item"><a href="https://www.facebook.com/tasnim.bennacer" target="_blank"><i class="fab fa-facebook fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.linkedin.com/in/tasnim-bennacer-42a3461a4/" target="_blank"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-github-alt fa-fw" target="_blank"></i></a></li>
+                    </ul><!--//social-list-->
+                    <hr>
+                </div><!--//profile-section-->
+
+                <ul class="navbar-nav flex-column text-left">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index"><i class="fas fa-home fa-fw mr-2"></i>Blog Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Archive">&nbsp;<i class="fas fa-archive mr-2"></i>Blog Archive</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/portfolio/index.html" target="_blank">&nbsp;<i class="far fa-address-card mr-2"></i>Portfolio</a>
+                    </li>
+                </ul>
+
+                <div class="my-2 my-md-3">
+                    <a class="btn btn-primary" href="~/portfolio/index.html#section-10" target="_blank">Get in Touch</a>
+                </div>
+            </div>
+        </nav>
+    </aside>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @await Html.PartialAsync("_StatusMessages")
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer text-muted theme-bg-dark">
+        <div class="container">
+            <!--<span style="color:orangered">&copy; @DateTime.Now.Year - Made with Asp.net Core - DevBlog</span> -->
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

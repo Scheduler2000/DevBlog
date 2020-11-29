@@ -1,0 +1,127 @@
+﻿@model (IEnumerable<DevBlog.Models.ArticleModel> articles,string email)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FontAwesome JS-->
+    <script defer src="~/assets/fontawesome/js/all.js"></script>
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="assets/css/theme-6.css">
+    <link href="~/assets/css/mdb.min.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+
+    <style>
+        .title-animated {
+            background-image: url(https://media.giphy.com/media/26BROrSHlmyzzHf3i/giphy.gif);
+            background-size: cover;
+            color: transparent;
+            -moz-background-clip: text;
+            -webkit-background-clip: text;
+            text-transform: uppercase;
+            font-size: 140px;
+            line-height: .75;
+            margin: 10px 0;
+        }
+
+    </style>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+           
+
+            $("#emailForm").submit(function (e) {
+                target = $("#emailInput").val();
+
+                 $.ajax({
+                     type: "POST",
+                     async: false,
+                     url: "@Url.Action("Subscribe")",
+                     dataType: "text",
+                     data: { email: target },
+                     success: function (message) {
+                         alert(message);
+
+                },
+                     error: function (req, status, error) {
+                        alert(error);
+                }
+            });
+
+        });
+        });
+
+    </script>
+
+</head>
+
+
+<body>
+    <div class="main-wrapper  bounceInDown slow">
+
+
+        <section class="cta-section theme-bg-light py-5">
+            <div class="container text-center">
+                <h2 class="heading @(ViewBag.Pointer == 0 ? "animated" : string.Empty) bounceInDown delay-2s title-animated">Programm or be programmed</h2>
+                <div class="intro">Welcome to my blog. Subscribe and get my latest blog post in your inbox.</div>
+                <form id="emailForm" class="signup-form form-inline justify-content-center pt-3">
+                    <div class="form-group">
+                        <input id="emailInput" type="email" pattern="@("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")" title="Email adress format is invalid " class="form-control mr-md-1 semail" placeholder="Enter email" required>
+                    </div>
+                    <input type="submit" class="btn btn-primary" />
+                </form>
+            </div><!--//container-->
+        </section> <!--//Articles-->
+        <section class="blog-list px-3 py-5 p-md-5">
+            <div class="container">
+
+                @{
+                    var animations = new string[] { "animated bounceInDown delay-1s slow", "animated bounceInDown slower", "item mb-5 animated bounceInDown slow" };
+                    for (int i = 0; i < Model.articles.Count(); i++)
+                    {
+                        var article = Model.articles.ElementAt(i);
+
+                        <div class="item mb-5 @animations[i]">
+                            <div class="media">
+                                <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="@article.ImageUrl" alt="image">
+                                <div class="media-body">
+                                    <h3 class="title mb-1"><a asp-controller="Article" asp-action="ShowArticle" asp-route-ArticleName="@article.Title">@article.Title</a></h3>
+                                    <div class="meta mb-1"><span class="date">Published 2 days ago</span><span class="time">@article.ReadingTime min read</span><span class="comment"><a href="#">@article.NumberOfComments comments</a></span></div>
+                                    <div class="intro">@article.Description</div>
+                                    <a class="more-link" asp-controller="Article" asp-action="ShowArticle" asp-route-ArticleName="@article.Title">Read more &rarr;</a>
+                                </div><!--//media-body-->
+                            </div><!--//media-->
+                        </div><!--//item-->
+                    }
+                }
+
+                <nav class="blog-nav nav nav-justified my-5">
+                    @if (ViewBag.Pointer >= 3)
+                    {
+                        <a class="nav-link-prev nav-item nav-link rounded-left" asp-route-Pointer="@(ViewBag.Pointer - 3)" asp-controller="Home" asp-action="Index">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
+                    }
+                    <a class="nav-link-next nav-item nav-link rounded" asp-route-Pointer="@(ViewBag.Pointer + 3)" asp-controller="Home" asp-action="Index">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+                </nav>
+            </div>
+            <!--//Articles-->
+        </section>
+
+
+    </div><!--//main-wrapper-->
+    <!-- Javascript -->
+    <script src="~/assets/plugins/popper.min.js"></script>
+    <script src="~/assets/plugins/bootstrap/js/bootstrap.js"></script>
+
+
+
+</body>
+</html>

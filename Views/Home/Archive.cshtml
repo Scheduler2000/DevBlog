@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Archive 🌳</title>
+    <link rel="stylesheet" href="~/lib/tree-maker/tree_maker-min.css">
+    <script type="text/javascript" src="~/lib/tree-maker/tree_maker-min.js"></script>
+      <!-- FontAwesome JS-->
+    <script defer src="~/assets/fontawesome/js/all.js"></script>
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="~/assets/css/theme-6.css">
+
+    <style>
+        .background-animated { background-image : none; }
+    </style>
+</head>
+
+<body>
+    <div id="my_tree"></div>
+    <script type="text/javascript">
+        let tree = {
+            1: {
+                2: '',
+                3: '',
+                4:'',
+                5: '',
+                6: '',
+                7: ''
+            },
+        };
+
+        let treeParams = {
+            01: { trad: 'Category' },
+            02: { trad: 'C' },
+            03: { trad: 'C++' },
+            04: { trad: 'C#' },
+            05: { trad: 'Java' },
+            06: { trad: 'Javascript' }, 
+            07: { trad: 'Other' }, 
+        };
+
+        treeMaker(tree, {
+            id: 'my_tree', card_click: function (element) {
+                console.log(element);
+                switch (element.id) {
+                    case 'card_2':
+                        window.open("https://facebook.com")
+                        break;
+                }
+            },
+            treeParams: treeParams,
+            'link_width': '4px',
+            'link_color': '#2199e8',
+        });
+    </script>
+</body>
+
+</html>
