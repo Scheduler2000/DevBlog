@@ -1,5 +1,5 @@
 # DevBlog
-Blog realized with ASP.NET 5 in progress...
+Blog realized with ASP.NET 5 - SSR / Blazor / SignalR
 
 Home page : 
 
